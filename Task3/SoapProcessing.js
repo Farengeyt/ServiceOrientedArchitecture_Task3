@@ -1,43 +1,54 @@
-﻿function soap() {
-    var xmlhttp = new XMLHttpRequest();
+﻿function grater_than() {
+    inputData = document.getElementById("grater_input").value;
+    inputParams = '<mark>' + inputData + '</mark>';
+    soap2('GetStudentsGraterThan', inputParams, 'grater_records_table');
+}
 
-    //replace second argument with the path to your Secret Server webservices
-    xmlhttp.open('POST', '/secretserver/webservices/sswebservice.asmx', true);
+function lower_than() {
+    inputData = document.getElementById("lower_input").value;
+    inputParams = '<mark>' + inputData + '</mark>';
+    soap2('GetStudentsLowerThan', inputParams, 'lower_records_table');
+}
 
-    //create the SOAP request
-    //replace username, password (and org + domain, if necessary) with the appropriate info
+function in_range() {
+    inputMinData = document.getElementById("range_input_min").value;
+    inputMaxData = document.getElementById("range_input_max").value;
+    inputParams = '<minMark>' + inputMinData + '</minMark><maxMark>' + inputMaxData + '</maxMark>';
+    soap2('GetStudentsInRange', inputParams, 'range_records_table');
+}
+
+function soap2(method, inputParams, output) {
+    document.getElementById(output).innerHTML = "<tbody><tr><th>Name</th><th>AvgMark</th></tr></tbody>";
     var strRequest =
         '<?xml version="1.0" encoding="utf-8"?>' +
-        '<soap:Envelope ' +
-        'xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"" ' +
-        'xmlns:xsd="http://www.w3.org/2001/XMLSchema"" ' +
-        'xmlns:soap="http://schemas.xmlsoap.org/soap/envelope/">'; +
-            '<soap:Body>' +
-            '<Authenticate xmlns="urn:thesecretserver.com">' +
-            '<username>username</username>' +
-            '<password>password</password>' +
-            '<organization></organization>' +
-            '<domain></domain>' +
-            '</Authenticate>' +
-            '</soap:Body>' +
-            '</soap:Envelope>';
+        '<soap12:Envelope xmlns:xsi = "http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd = "http://www.w3.org/2001/XMLSchema" xmlns:soap12 = "http://www.w3.org/2003/05/soap-envelope">' +
+        '<soap12:Body>' +
+        '<' + method + ' xmlns="http://www.mycompany.com/">' +
+        inputParams +
+        '</' + method + '>' +
+        '</soap12:Body>' +
+        '</soap12:Envelope>';
 
-    //specify request headers
-    xmlhttp.setRequestHeader('Content-Type', 'text/xml; charset=utf-8');
-    xmlhttp.setRequestHeader('SOAPAction', '"urn:thesecretserver.com/Authenticate"';);
+    $.ajax({
+        type: "POST",
+        url: "/StudentListWebService.asmx",
+        contentType: "application/soap+xml; charset=utf-8",
+        data: strRequest,
+        error: function (request, status, error) {
 
-    //FOR TESTING: display results in an alert box once the response is received
-    xmlhttp.onreadystatechange = function () {
-        if (xmlhttp.readyState == 4) {
-            alert(xmlhttp.responseText);
+            console.log("request:" + request);
+            console.log("status:" + status);
+            console.log("error:" + error);
         }
-    };
+    }).done(function (response) {
 
-    //send the SOAP request
-    xmlhttp.send(strRequest);
-};
+        var listResponse = response.getElementsByTagName('Student');
 
-//build & send the request when the page loads
-window.onload = function () {
-    soap();
-};
+        var trHTML = '';
+        $.each(listResponse, function (i, item) {
+            trHTML += '<tr><td>' + item.childNodes[0].textContent + '</td><td>' + item.childNodes[1].textContent + '</td></tr>';
+        });
+
+        $('#' + output).append(trHTML);
+    });
+}

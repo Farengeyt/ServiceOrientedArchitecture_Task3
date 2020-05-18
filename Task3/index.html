@@ -2,10 +2,93 @@
 <html>
 <head>
     <meta charset="utf-8" />
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
     <script src="SoapProcessing.js"></script>
+    <script src="SoapProcessingWithoutJquery.js"></script>
+    <link rel="stylesheet" href="style.css" />
     <title></title>
 </head>
 <body>
-
+    <div class="row">
+        <div class="column">
+            <h1>With Jquery</h1>
+            <ul>
+                <li>
+                    <h3>GetStudentsGraterThan</h3>
+                    <input id="grater_input" value="0" type="number" />
+                    <button onclick="grater_than()">Invoke</button>
+                    <table id="grater_records_table" border='1'>
+                        <tr>
+                            <th>Name</th>
+                            <th>AvgMark</th>
+                        </tr>
+                    </table>
+                </li>
+                <li>
+                    <h3>GetStudentsLowerThan</h3>
+                    <input id="lower_input" type="number" value="5" />
+                    <button onclick="lower_than()">Invoke</button>
+                    <table id="lower_records_table" border='1'>
+                        <tr>
+                            <th>Name</th>
+                            <th>AvgMark</th>
+                        </tr>
+                    </table>
+                </li>
+                <li>
+                    <h3>GetStudentsInRange</h3>
+                    <input id="range_input_min" type="number" value="0" />
+                    <input id="range_input_max" type="number" value="5" />
+                    <button onclick="in_range()">Invoke</button>
+                    <table id="range_records_table" border='1'>
+                        <tr>
+                            <th>Name</th>
+                            <th>AvgMark</th>
+                        </tr>
+                    </table>
+                </li>
+            </ul>
+        </div>
+        <!-- ------------------------------------------------------------------------------------------------------------------------ -->
+        <div class="column">
+            <h1>Without Jquery</h1>
+            <ul>
+                <li>
+                    <h3>GetStudentsGraterThan</h3>
+                    <input id="grater_input_clear" value="0" type="number" />
+                    <button onclick="grater_than_clear()">Invoke</button>
+                    <table id="grater_records_table_clear" border='1'>
+                        <tr>
+                            <th>Name</th>
+                            <th>AvgMark</th>
+                        </tr>
+                    </table>
+                </li>
+                <li>
+                    <h3>GetStudentsLowerThan</h3>
+                    <input id="lower_input_clear" type="number" value="5" />
+                    <button onclick="lower_than_clear()">Invoke</button>
+                    <table id="lower_records_table_clear" border='1'>
+                        <tr>
+                            <th>Name</th>
+                            <th>AvgMark</th>
+                        </tr>
+                    </table>
+                </li>
+                <li>
+                    <h3>GetStudentsInRange</h3>
+                    <input id="range_input_min_clear" type="number" value="0" />
+                    <input id="range_input_max_clear" type="number" value="5" />
+                    <button onclick="in_range_clear()">Invoke</button>
+                    <table id="range_records_table_clear" border='1'>
+                        <tr>
+                            <th>Name</th>
+                            <th>AvgMark</th>
+                        </tr>
+                    </table>
+                </li>
+            </ul>
+        </div>
+    </div>
 </body>
 </html>

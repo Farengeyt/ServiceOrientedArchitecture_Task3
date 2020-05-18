@@ -15,7 +15,7 @@
     <AssemblyName>Task3</AssemblyName>
     <TargetFrameworkVersion>v4.7.2</TargetFrameworkVersion>
     <UseIISExpress>true</UseIISExpress>
-    <Use64BitIISExpress />
+    <Use64BitIISExpress>false</Use64BitIISExpress>
     <IISExpressSSLPort>44373</IISExpressSSLPort>
     <IISExpressAnonymousAuthentication />
     <IISExpressWindowsAuthentication />
@@ -69,8 +69,10 @@
   <ItemGroup>
     <Content Include="index.html" />
     <Content Include="SoapProcessing.js" />
+    <Content Include="SoapProcessingWithoutJquery.js" />
     <Content Include="StudentListWebService.asmx" />
     <Content Include="StudentXML.xml" />
+    <Content Include="style.css" />
     <Content Include="Web.config" />
   </ItemGroup>
   <ItemGroup>

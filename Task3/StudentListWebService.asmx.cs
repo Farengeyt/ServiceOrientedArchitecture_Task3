@@ -23,14 +23,12 @@ namespace Task3
     {
 
         [WebMethod]
-        [ScriptMethod(ResponseFormat = ResponseFormat.Json)]
         public string HelloWorld(string text)
         {
             return "Hello world! " + text;
         }
 
         [WebMethod]
-        [ScriptMethod(ResponseFormat = ResponseFormat.Json)]
         public Student[] GetStudentsGraterThan(float mark)
         {
             var pathToFile = HostingEnvironment.MapPath("~/StudentXML.xml");
@@ -43,7 +41,6 @@ namespace Task3
             return newpeople.Where(s => s.AvgMark > mark).ToArray();
         }
         [WebMethod]
-        [ScriptMethod(ResponseFormat = ResponseFormat.Json)]
         public Student[] GetStudentsLowerThan(float mark)
         {
             var pathToFile = HostingEnvironment.MapPath("~/StudentXML.xml");
@@ -56,7 +53,6 @@ namespace Task3
             return newpeople.Where(s => s.AvgMark < mark).ToArray();
         }
         [WebMethod]
-        [ScriptMethod(ResponseFormat = ResponseFormat.Json)]
         public Student[] GetStudentsInRange(float minMark = 0, float maxMark = 5)
         {
             var pathToFile = HostingEnvironment.MapPath("~/StudentXML.xml");
