@@ -31,7 +31,7 @@ function soap2(method, inputParams, output) {
 
     $.ajax({
         type: "POST",
-        url: "/StudentListWebService.asmx",
+        url: "https://localhost:44373/StudentListWebService.asmx",
         contentType: "application/soap+xml; charset=utf-8",
         data: strRequest,
         error: function (request, status, error) {

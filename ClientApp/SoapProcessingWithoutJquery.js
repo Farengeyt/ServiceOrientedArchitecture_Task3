@@ -21,7 +21,7 @@ function soap(method, inputParams, output) {
     var xmlhttp = new XMLHttpRequest();
 
     //replace second argument with the path to your Secret Server webservices
-    xmlhttp.open('POST', '/StudentListWebService.asmx', true);
+    xmlhttp.open('POST', 'https://localhost:44373/StudentListWebService.asmx', true);
 
     xmlhttp.setRequestHeader('Content-Type', 'application/soap+xml; charset=utf-8')
     //create the SOAP request
